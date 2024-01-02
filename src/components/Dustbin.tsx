@@ -10,7 +10,7 @@ const style: CSSProperties = {
 
 export interface DustbinProps {
   accept: string;
-  lastDroppedItem?: any;
+  lastDroppedItem: any;
   onDrop: (item: any) => void;
 }
 
@@ -22,6 +22,7 @@ export const Dustbin: FC<DustbinProps> = memo(function Dustbin({
   const [{ isOver, canDrop }, drop] = useDrop({
     accept,
     drop: onDrop,
+    canDrop: () => !lastDroppedItem,
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),

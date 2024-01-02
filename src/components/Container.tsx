@@ -183,15 +183,17 @@ export const Container: FC = memo(function Container() {
           item.label ? { $push: [item.label] } : { $push: [] }
         )
       );
-      setDustbins(
-        update(dustbins, {
-          [index]: {
-            lastDroppedItem: {
-              $set: item,
+
+      dustbins[index].lastDroppedItem == null &&
+        setDustbins(
+          update(dustbins, {
+            [index]: {
+              lastDroppedItem: {
+                $set: item,
+              },
             },
-          },
-        })
-      );
+          })
+        );
     },
     [droppedBoxNames, dustbins]
   );
