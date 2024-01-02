@@ -1,8 +1,8 @@
 import update from "immutability-helper";
 import type { CSSProperties, FC } from "react";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { Box } from "./Box";
-import { Dustbin } from "./Dustbin";
+import { ListItem } from "./ListItem";
 
 const gridContainerStyle: CSSProperties = {
   display: "grid",
@@ -211,10 +211,6 @@ export const Container: FC = memo(function Container() {
     setSearch(value);
   };
 
-  useEffect(() => {
-    console.log(dustbins);
-  }, [dustbins]);
-
   return (
     <div className="flex items-start justify-start gap-4 p-2">
       <div className="w-[15rem]">
@@ -227,7 +223,7 @@ export const Container: FC = memo(function Container() {
         />
         <ul>
           {boxes.map((box, index) => (
-            <Box
+            <ListItem
               droppedBoxNames={droppedBoxNames}
               item={box}
               type={box.type}
@@ -239,7 +235,7 @@ export const Container: FC = memo(function Container() {
       </div>
       <div style={{ ...gridContainerStyle }}>
         {dustbins.map(({ accepts, lastDroppedItem }, index) => (
-          <Dustbin
+          <Box
             accept={accepts}
             lastDroppedItem={lastDroppedItem}
             onDrop={(item) => handleDrop(index, item)}
